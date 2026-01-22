@@ -25,4 +25,13 @@ class DoodleModel {
       fullImageBase64: json['fullImageBase64'] as String?,
     );
   }
+
+  Map<String, dynamic> toJson() => {
+    'id': id,
+    'title': title,
+    'authorId': authorId,
+    'authorName': authorName,
+    'previewBase64': previewBase64,
+    'fullImageBase64': fullImageBase64,
+  };
 }
