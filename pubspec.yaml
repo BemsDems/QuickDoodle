@@ -58,6 +58,7 @@ dependencies:
   #UI
   flutter_drawing_board: ^1.0.1+2
   flutter_svg: ^2.2.3
+  flutter_inset_shadow: ^2.0.3
 
   #Fonts
   google_fonts: ^7.1.0
