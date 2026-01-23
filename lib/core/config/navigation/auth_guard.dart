@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:quick_doodle/presentation/auth/signIn_screen.dart';
+import 'package:quick_doodle/presentation/gallery/gallery_screen.dart';
 import 'package:quick_doodle/shared/providers/user/auth_user_provider.dart';
 
 class AuthGuard extends ConsumerWidget {
@@ -13,7 +14,8 @@ class AuthGuard extends ConsumerWidget {
     return auth.when(
       loading: () => const SizedBox.shrink(),
       error: (_, __) => const SignInScreen(),
-      data: (user) => user == null ? const SignInScreen() : const SizedBox(),
+      data: (user) =>
+          user == null ? const SignInScreen() : const GalleryScreen(),
     );
   }
 }

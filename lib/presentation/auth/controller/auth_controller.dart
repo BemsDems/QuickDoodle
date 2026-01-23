@@ -5,6 +5,7 @@ import 'package:quick_doodle/models/user/user_model.dart';
 
 final authControllerProvider =
     StateNotifierProvider.autoDispose<AuthController, AsyncValue<void>>((ref) {
+      ref.keepAlive();
       return AuthController(ref);
     });
 

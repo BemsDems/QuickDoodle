@@ -53,7 +53,7 @@ class ErrorMapper {
   String _mapFirestoreMessage(FirebaseException error) {
     switch (error.code) {
       case 'permission-denied':
-        return 'Нет прав для выполнения операции (проверь Firestore Rules)';
+        return 'Нет прав для выполнения операции';
       case 'unauthenticated':
         return 'Требуется авторизация';
       case 'not-found':
@@ -77,7 +77,7 @@ class ErrorMapper {
       case 'internal':
         return 'Внутренняя ошибка Firestore';
       case 'data-loss':
-        return 'Потеря/повреждение данных';
+        return 'Потеря или повреждение данных';
       default:
         return error.message ?? 'Ошибка Firestore';
     }
