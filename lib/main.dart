@@ -1,11 +1,16 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:quick_doodle/core/config/firebase_options.dart';
+import 'package:quick_doodle/core/config/navigation/app_routes.dart';
+import 'package:quick_doodle/core/config/navigation/auth_guard.dart';
+import 'package:quick_doodle/presentation/auth/signIn_screen.dart';
+import 'package:quick_doodle/presentation/auth/signUp_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  runApp(const MyApp());
+  runApp(ProviderScope(child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -15,24 +20,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Quick Doodle',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      ),
-      home: const MyHomePage(),
+      routes: {
+        AppRoutes.signIn: (_) => const SignInScreen(),
+        AppRoutes.signUp: (_) => const SignUpScreen(),
+      },
+      home: AuthGuard(),
     );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold();
   }
 }

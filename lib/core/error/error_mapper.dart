@@ -40,7 +40,7 @@ class ErrorMapper {
       case 'email-already-in-use':
         return 'Email уже используется';
       case 'weak-password':
-        return 'Слишком простой пароль (минимум 6 символов)';
+        return 'Слишком простой пароль (минимум 8 символов)';
       case 'operation-not-allowed':
         return 'Операция запрещена';
       case 'invalid-credential':

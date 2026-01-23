@@ -5,6 +5,7 @@ import 'package:quick_doodle/core/config/app_text_styles.dart';
 class CustomButton extends StatelessWidget {
   final String title;
   final VoidCallback? onPressed;
+  final bool enabled;
   final Color? backgroundColor;
   final Color? textColor;
 
@@ -12,6 +13,7 @@ class CustomButton extends StatelessWidget {
     super.key,
     required this.title,
     required this.onPressed,
+    this.enabled = true,
     this.backgroundColor,
     this.textColor,
   });
@@ -19,7 +21,7 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final button = ElevatedButton(
-      onPressed: onPressed,
+      onPressed: enabled ? onPressed : null,
       clipBehavior: Clip.antiAlias,
       style:
           ElevatedButton.styleFrom(

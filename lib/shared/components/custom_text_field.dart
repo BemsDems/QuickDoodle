@@ -8,13 +8,19 @@ class CustomTextField extends StatelessWidget {
     super.key,
     required this.nameTextField,
     required this.hintText,
+    this.obscureText = false,
     required this.textEditingController,
+
+    this.onChanged,
     this.validator,
   });
 
   final String nameTextField;
   final String hintText;
+  final bool obscureText;
   final TextEditingController textEditingController;
+  final void Function(String)? onChanged;
+
   final String? Function(String?)? validator;
 
   @override
@@ -57,6 +63,9 @@ class CustomTextField extends StatelessWidget {
           ),
           TextFormField(
             controller: textEditingController,
+            obscureText: obscureText,
+            obscuringCharacter: '*',
+            onChanged: onChanged,
             validator: validator,
             style: AppTextStyles.robotoRegular15.copyWith(
               color: AppColors.white,
@@ -69,6 +78,21 @@ class CustomTextField extends StatelessWidget {
               ),
               contentPadding: EdgeInsets.only(top: 10, bottom: 2),
               constraints: BoxConstraints(),
+              errorStyle: AppTextStyles.robotoRegular13.copyWith(
+                color: const Color(0xFFFFA6A6).withValues(alpha: 1),
+              ),
+              errorBorder: UnderlineInputBorder(
+                borderSide: BorderSide(
+                  color: Color(0xFFFFA6A6).withValues(alpha: 0.8),
+                  width: 1,
+                ),
+              ),
+              focusedErrorBorder: UnderlineInputBorder(
+                borderSide: BorderSide(
+                  color: Color(0xFFFFA6A6).withValues(alpha: 0.8),
+                  width: 1.5,
+                ),
+              ),
             ),
           ),
         ],
