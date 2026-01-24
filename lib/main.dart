@@ -14,9 +14,11 @@ import 'package:quick_doodle/shared/observer/auth_navigator_observer.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  await NotificationService.initialize();
-  FirebaseDatabase.instance.setPersistenceEnabled(true);
+  Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  ).then((_) => FirebaseDatabase.instance.setPersistenceEnabled(true));
+  NotificationService.initialize();
+
   runApp(ProviderScope(child: const MyApp()));
 }
 

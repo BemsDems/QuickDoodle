@@ -4,10 +4,29 @@ class NotificationService {
   static final FlutterLocalNotificationsPlugin _notifications =
       FlutterLocalNotificationsPlugin();
 
+  static Future<bool> _requestPermission() async {
+    final ios = _notifications
+        .resolvePlatformSpecificImplementation<
+          IOSFlutterLocalNotificationsPlugin
+        >();
+    final android = _notifications
+        .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin
+        >();
+
+    final bool? iosResult = await ios?.requestPermissions(
+      alert: true,
+      badge: true,
+      sound: true,
+    );
+    final bool? androidResult = await android?.requestNotificationsPermission();
+
+    return (iosResult ?? false) || (androidResult ?? false);
+  }
+
   static Future<void> initialize() async {
     const AndroidInitializationSettings androidSettings =
         AndroidInitializationSettings('@mipmap/ic_launcher');
-
     const DarwinInitializationSettings iosSettings =
         DarwinInitializationSettings(
           requestAlertPermission: true,
@@ -22,30 +41,8 @@ class NotificationService {
       android: androidSettings,
       iOS: iosSettings,
     );
-
-    await _notifications.initialize(settings);
-
-    final iosImplementation = _notifications
-        .resolvePlatformSpecificImplementation<
-          IOSFlutterLocalNotificationsPlugin
-        >();
-
-    if (iosImplementation != null) {
-      await iosImplementation.requestPermissions(
-        alert: true,
-        badge: true,
-        sound: true,
-        critical: false,
-      );
-    }
-
-    final androidImplementation = _notifications
-        .resolvePlatformSpecificImplementation<
-          AndroidFlutterLocalNotificationsPlugin
-        >();
-
-    if (androidImplementation != null) {
-      await androidImplementation.requestNotificationsPermission();
+    if (await _requestPermission()) {
+      await _notifications.initialize(settings);
     }
   }
 
@@ -77,6 +74,7 @@ class NotificationService {
       iOS: iosDetails,
     );
 
+    
     await _notifications.show(id, title, body, details);
   }
 }
