@@ -81,103 +81,118 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
 
     return CustomScaffold(
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         child: Column(
           children: [
             Align(
               alignment: Alignment.centerLeft,
-              child: IconButton(
-                icon: SvgPicture.asset('assets/icons/arrow_back.svg'),
-                onPressed: () => Navigator.pop(context),
-                style: const ButtonStyle(
-                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              child: SizedBox(
+                width: 50,
+                height: 50,
+                child: IconButton(
+                  icon: SvgPicture.asset('assets/icons/arrow_back.svg'),
+                  onPressed: () => Navigator.pop(context),
+                  style: const ButtonStyle(
+                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  ),
+                  alignment: Alignment.centerLeft,
+                  padding: EdgeInsets.zero,
+                  constraints: BoxConstraints(),
                 ),
-                padding: EdgeInsets.zero,
-                constraints: BoxConstraints(),
               ),
             ),
             Expanded(
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    GradientBlurOutlinedText(
-                      text: 'Регистрация',
-                      style: AppTextStyles.pressStartRegular20,
-                      gradient: const LinearGradient(
-                        colors: [
-                          Color.fromRGBO(137, 36, 231, 1),
-                          Color.fromRGBO(106, 70, 249, 1),
-                        ],
-                      ),
-                      strokeWidth: 2,
-                      glowSigma: 6,
-                      glowStrokeExtra: 2,
-                      fillColor: AppColors.white,
-                    ),
-                    const SizedBox(height: 20),
-                    Center(
-                      child: CustomTextField(
-                        nameTextField: 'Имя',
-                        hintText: 'Введите ваше имя',
-                        textEditingController: _nameController,
-                        onChanged: (_) =>
-                            setState(() => _backendErrorText = null),
-                        validator: (value) =>
-                            AuthValidators.requiredField(value, 'Введите имя'),
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    Center(
-                      child: CustomTextField(
-                        nameTextField: 'e-mail',
-                        hintText: 'Ваша электронная почта',
-                        textEditingController: _emailController,
-                        onChanged: (_) =>
-                            setState(() => _backendErrorText = null),
-                        validator: AuthValidators.email,
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    Center(
-                      child: CustomTextField(
-                        nameTextField: 'Пароль',
-                        hintText: '8-16 символов',
-                        obscureText: true,
-                        textEditingController: _passwordController,
-                        onChanged: (_) =>
-                            setState(() => _backendErrorText = null),
-                        validator: AuthValidators.password,
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    Center(
-                      child: CustomTextField(
-                        nameTextField: 'Подтверждение пароля',
-                        hintText: '8-16 символов',
-                        obscureText: true,
-                        textEditingController: _confirmPasswordController,
-                        onChanged: (_) =>
-                            setState(() => _backendErrorText = null),
-                        validator: (value) => AuthValidators.confirmPassword(
-                          value,
-                          _passwordController.text,
+              child: Center(
+                child: SingleChildScrollView(
+                  padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom,
+                  ),
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        GradientBlurOutlinedText(
+                          text: 'Регистрация',
+                          style: AppTextStyles.pressStartRegular20,
+                          gradient: const LinearGradient(
+                            colors: [
+                              Color.fromRGBO(137, 36, 231, 1),
+                              Color.fromRGBO(106, 70, 249, 1),
+                            ],
+                          ),
+                          strokeWidth: 2,
+                          glowSigma: 6,
+                          glowStrokeExtra: 2,
+                          fillColor: AppColors.white,
                         ),
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    if (_backendErrorText != null)
-                      Center(
-                        child: Text(
-                          _backendErrorText!,
-                          style: AppTextStyles.robotoRegular15.copyWith(
-                            color: AppColors.white,
+                        const SizedBox(height: 20),
+                        Center(
+                          child: CustomTextField(
+                            nameTextField: 'Имя',
+                            hintText: 'Введите ваше имя',
+                            textEditingController: _nameController,
+                            onChanged: (_) =>
+                                setState(() => _backendErrorText = null),
+                            validator: (value) => AuthValidators.requiredField(
+                              value,
+                              'Введите имя',
+                            ),
                           ),
                         ),
-                      ),
-                  ],
+                        const SizedBox(height: 20),
+                        Center(
+                          child: CustomTextField(
+                            nameTextField: 'e-mail',
+                            hintText: 'Ваша электронная почта',
+                            textEditingController: _emailController,
+                            onChanged: (_) =>
+                                setState(() => _backendErrorText = null),
+                            validator: AuthValidators.email,
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        Center(
+                          child: CustomTextField(
+                            nameTextField: 'Пароль',
+                            hintText: '8-16 символов',
+                            obscureText: true,
+                            textEditingController: _passwordController,
+                            onChanged: (_) =>
+                                setState(() => _backendErrorText = null),
+                            validator: AuthValidators.password,
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        Center(
+                          child: CustomTextField(
+                            nameTextField: 'Подтверждение пароля',
+                            hintText: '8-16 символов',
+                            obscureText: true,
+                            textEditingController: _confirmPasswordController,
+                            onChanged: (_) =>
+                                setState(() => _backendErrorText = null),
+                            validator: (value) =>
+                                AuthValidators.confirmPassword(
+                                  value,
+                                  _passwordController.text,
+                                ),
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        if (_backendErrorText != null)
+                          Center(
+                            child: Text(
+                              _backendErrorText!,
+                              style: AppTextStyles.robotoRegular15.copyWith(
+                                color: AppColors.white,
+                              ),
+                            ),
+                          ),
+                      ],
+                    ),
+                  ),
                 ),
               ),
             ),

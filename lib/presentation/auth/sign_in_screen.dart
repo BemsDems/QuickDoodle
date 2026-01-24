@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:quick_doodle/core/config/app_colors.dart';
@@ -73,64 +72,69 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
 
     return CustomScaffold(
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         child: Column(
           children: [
             Expanded(
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    GradientBlurOutlinedText(
-                      text: 'Вход',
-                      style: AppTextStyles.pressStartRegular20,
-                      gradient: const LinearGradient(
-                        colors: [
-                          Color.fromRGBO(137, 36, 231, 1),
-                          Color.fromRGBO(106, 70, 249, 1),
-                        ],
-                      ),
-                      strokeWidth: 2,
-                      glowSigma: 6,
-                      glowStrokeExtra: 2,
-                      fillColor: AppColors.white,
-                    ),
-                    const SizedBox(height: 20),
-                    Center(
-                      child: CustomTextField(
-                        nameTextField: 'e-mail',
-                        hintText: 'Введите электронную почту',
-                        textEditingController: _emailController,
-                        onChanged: (_) =>
-                            setState(() => _backendErrorText = null),
-                        validator: AuthValidators.email,
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    Center(
-                      child: CustomTextField(
-                        nameTextField: 'Пароль',
-                        hintText: 'Введите пароль',
-                        obscureText: true,
-                        textEditingController: _passwordController,
-                        onChanged: (_) =>
-                            setState(() => _backendErrorText = null),
-                        validator: AuthValidators.password,
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    if (_backendErrorText != null)
-                      Center(
-                        child: Text(
-                          _backendErrorText!,
-                          style: AppTextStyles.robotoRegular15.copyWith(
-                            color: AppColors.white,
+              child: Center(
+                child: SingleChildScrollView(
+                  padding: EdgeInsets.only(bottom: 50),
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        GradientBlurOutlinedText(
+                          text: 'Вход',
+                          style: AppTextStyles.pressStartRegular20,
+                          gradient: const LinearGradient(
+                            colors: [
+                              Color.fromRGBO(137, 36, 231, 1),
+                              Color.fromRGBO(106, 70, 249, 1),
+                            ],
+                          ),
+                          strokeWidth: 2,
+                          glowSigma: 6,
+                          glowStrokeExtra: 2,
+                          fillColor: AppColors.white,
+                        ),
+                        const SizedBox(height: 20),
+                        Center(
+                          child: CustomTextField(
+                            nameTextField: 'e-mail',
+                            hintText: 'Введите электронную почту',
+                            textEditingController: _emailController,
+                            onChanged: (_) =>
+                                setState(() => _backendErrorText = null),
+                            validator: AuthValidators.email,
                           ),
                         ),
-                      ),
-                  ],
+                        const SizedBox(height: 20),
+                        Center(
+                          child: CustomTextField(
+                            nameTextField: 'Пароль',
+                            hintText: 'Введите пароль',
+                            obscureText: true,
+                            textEditingController: _passwordController,
+                            onChanged: (_) =>
+                                setState(() => _backendErrorText = null),
+                            validator: AuthValidators.password,
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        if (_backendErrorText != null)
+                          Center(
+                            child: Text(
+                              _backendErrorText!,
+                              style: AppTextStyles.robotoRegular15.copyWith(
+                                color: AppColors.white,
+                              ),
+                            ),
+                          ),
+                      ],
+                    ),
+                  ),
                 ),
               ),
             ),
