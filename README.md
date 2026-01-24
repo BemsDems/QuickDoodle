@@ -1,16 +1,42 @@
-# quick_doodle
+# QuickDoodle
 
-A new Flutter project.
+## Архитектура
 
-## Getting Started
+lib/
+├── core/           # Базовая инфраструктура
+│   ├── di/         # Dependency Injection (Riverpod)
+│   ├── error/      # Обработка ошибок (AppFailure)
+│   └── config/     # Цвета, стили, роутинг
+├── data/           # Репозитории + Data Sources
+│   └── repositories/
+├── models/         # Модели (DoodleModel, UserModel)
+├── presentation/   # UI + контроллеры (MVVM-подобная)
+│   ├── auth/       # Экраны авторизации
+│   ├── gallery/    # Галерея рисунков
+│   └── doodle/     # Редактор рисунков
+└── shared/         # Переиспользуемые компоненты
 
-This project is a starting point for a Flutter application.
+## Стек технологий
 
-A few resources to get you started if this is your first Flutter project:
+Стейтменеджер и DI
+Riverpod 
+fpdart
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Backend
+Firebase Auth 6.1.4 (Email/Password)
+Firebase Realtime Database 12.1.2 (user/{uid}/doodles/)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+UI/UX
+flutter_drawing_board 1.0.1 (рисование)
+flutter_svg 2.2.3 (иконки)
+flutter_inset_shadow 2.0.3 (тени)
+google_fonts 7.1.0 (Roboto)
+
+Медиа и кэш
+flutter_cache_manager 3.4.1 (LRU кэш изображений)
+flutter_image_compress 2.4.0 (сжатие JPEG)
+image_picker 1.2.1 + saver_gallery 4.1.0 (галерея/сохранение)
+
+Сетевые проверки
+internet_connection_checker_plus
+

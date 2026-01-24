@@ -25,7 +25,10 @@ class GalleryScreen extends ConsumerWidget {
           onPressed: () async {
             final isLogout = await _confirmLogout(context);
             if (isLogout) {
+              ref.exists(doodlesProvider);
+              ref.invalidate(doodleCacheProvider);
               await ref.read(authControllerProvider.notifier).signOut();
+              Navigator.pushReplacementNamed(context, AppRoutes.signIn);
             }
           },
           icon: SvgPicture.asset('assets/icons/logout.svg'),

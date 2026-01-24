@@ -20,10 +20,10 @@ class AuthController extends StateNotifier<AsyncValue<void>> {
   }) async {
     state = const AsyncLoading();
 
-    final repo = ref.read(authRepositoryProvider);
-    final res = await repo.signIn(email: email, password: password);
+    final repository = ref.read(authRepositoryProvider);
+    final result = await repository.signIn(email: email, password: password);
 
-    return res.fold(
+    return result.fold(
       (failure) {
         state = AsyncError(failure.message, StackTrace.current);
         return null;
@@ -42,10 +42,14 @@ class AuthController extends StateNotifier<AsyncValue<void>> {
   }) async {
     state = const AsyncLoading();
 
-    final repo = ref.read(authRepositoryProvider);
-    final res = await repo.signUp(email: email, password: password, name: name);
+    final repository = ref.read(authRepositoryProvider);
+    final result = await repository.signUp(
+      email: email,
+      password: password,
+      name: name,
+    );
 
-    return res.fold(
+    return result.fold(
       (failure) {
         state = AsyncError(failure.message, StackTrace.current);
         return null;
@@ -60,10 +64,10 @@ class AuthController extends StateNotifier<AsyncValue<void>> {
   Future<void> signOut() async {
     state = const AsyncLoading();
 
-    final repo = ref.read(authRepositoryProvider);
-    final res = await repo.signOut();
+    final repository = ref.read(authRepositoryProvider);
+    final result = await repository.signOut();
 
-    res.fold(
+    result.fold(
       (failure) => state = AsyncError(failure.message, StackTrace.current),
       (_) => state = const AsyncData(null),
     );

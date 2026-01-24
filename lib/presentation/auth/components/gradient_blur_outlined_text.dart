@@ -44,9 +44,7 @@ class GradientBlurOutlinedText extends StatelessWidget {
     return Stack(
       children: [
         Text(text, style: style.copyWith(foreground: glowPaint)),
-
         Text(text, style: style.copyWith(foreground: strokePaint)),
-
         Text(text, style: style.copyWith(color: fillColor)),
       ],
     );

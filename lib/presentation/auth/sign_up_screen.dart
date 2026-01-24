@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:quick_doodle/core/config/app_colors.dart';
 import 'package:quick_doodle/core/config/app_text_styles.dart';
+import 'package:quick_doodle/core/config/navigation/app_routes.dart';
 import 'package:quick_doodle/presentation/auth/components/gradient_blur_outlined_text.dart';
 import 'package:quick_doodle/presentation/auth/controller/auth_controller.dart';
 import 'package:quick_doodle/shared/components/custom_button.dart';
@@ -209,7 +210,9 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                         password: _passwordController.text,
                       );
 
-                  if (user != null && context.mounted) {}
+                  if (user != null && context.mounted) {
+                    Navigator.pushReplacementNamed(context, AppRoutes.gallery);
+                  }
                 }
               },
             ),

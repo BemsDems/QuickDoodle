@@ -63,6 +63,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
     final authState = ref.watch(authControllerProvider);
     final isLoading = authState.isLoading;
     final canSubmit = _allFilled && !isLoading;
+
     ref.listen(authControllerProvider, (prev, next) {
       final error = next.whenOrNull(error: (e, _) => e)?.toString();
       if (error != _backendErrorText) {
@@ -150,7 +151,9 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                         password: _passwordController.text,
                       );
 
-                  if (user != null && context.mounted) {}
+                  if (user != null && context.mounted) {
+                    Navigator.pushReplacementNamed(context, AppRoutes.gallery);
+                  }
                 }
               },
             ),

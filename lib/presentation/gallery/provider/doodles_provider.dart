@@ -10,8 +10,8 @@ final doodlesProvider = StreamProvider.autoDispose<List<DoodleModel>>((ref) {
     return Stream.value(<DoodleModel>[]);
   }
 
-  final repo = ref.watch(doodleRepositoryProvider);
-  return repo.watchDoodles(userUid: user.uid).map((result) {
+  final repository = ref.watch(doodleRepositoryProvider);
+  return repository.watchDoodles(userUid: user.uid).map((result) {
     return result.fold(
       (failure) => throw failure.message,
       (doodles) => doodles,
