@@ -1,7 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:quick_doodle/core/config/firebase_options.dart';
 import 'package:quick_doodle/core/config/navigation/app_routes.dart';
@@ -14,8 +13,7 @@ import 'package:quick_doodle/presentation/gallery/gallery_screen.dart';
 import 'package:quick_doodle/shared/observer/auth_navigator_observer.dart';
 
 Future<void> main() async {
-  final b = WidgetsFlutterBinding.ensureInitialized();
-  FlutterNativeSplash.preserve(widgetsBinding: b);
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await NotificationService.initialize();
   FirebaseDatabase.instance.setPersistenceEnabled(true);
