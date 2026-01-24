@@ -60,6 +60,7 @@ dependencies:
   flutter_svg: ^2.2.3
   flutter_inset_shadow: ^2.0.3
   share_plus: ^12.0.1
+  splash_master: ^0.0.3
 
   #Device
   image_picker: ^1.2.1
@@ -95,7 +96,19 @@ dev_dependencies:
   freezed: ^3.2.3
   auto_route_generator: ^10.2.6
 
-  sqflite_common_ffi: ^2.3.3
+  flutter_launcher_icons: ^0.14.4
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icons/iconApp.png"
+  min_sdk_android: 21
+
+splash_master:
+  image: "assets/images/splash.png"
+  android_12_and_above:
+    color: "#1a1b24"
+    image: "assets/images/splash.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
