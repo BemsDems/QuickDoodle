@@ -38,6 +38,15 @@ class NotificationService {
         critical: false,
       );
     }
+
+    final androidImplementation = _notifications
+        .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin
+        >();
+
+    if (androidImplementation != null) {
+      await androidImplementation.requestNotificationsPermission();
+    }
   }
 
   static Future<void> show({
@@ -52,7 +61,7 @@ class NotificationService {
           channelDescription: 'Уведомления о сохранении рисунков',
           importance: Importance.max,
           priority: Priority.high,
-          icon: '@mipmap/ic_launcher',
+          largeIcon: DrawableResourceAndroidBitmap('ic_launcher_foreground'),
         );
 
     const DarwinNotificationDetails iosDetails = DarwinNotificationDetails(
