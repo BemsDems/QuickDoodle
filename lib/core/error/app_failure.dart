@@ -16,8 +16,8 @@ class AuthFailure extends AppFailure {
   const AuthFailure({required super.message, super.code});
 }
 
-class FirestoreFailure extends AppFailure {
-  const FirestoreFailure({required super.message, super.code});
+class RealtimeDatabaseFailure extends AppFailure {
+  const RealtimeDatabaseFailure({required super.message, super.code});
 }
 
 class UnknownFailure extends AppFailure {

@@ -12,9 +12,9 @@ class ErrorMapper {
     }
 
     if (error is FirebaseException) {
-      if (error.plugin == 'cloud_firestore') {
-        return FirestoreFailure(
-          message: _mapFirestoreMessage(error),
+      if (error.plugin == 'firebase_database') {
+        return RealtimeDatabaseFailure(
+          message: _mapRealtimeMessage(error),
           code: error.code,
         );
       }
@@ -50,36 +50,28 @@ class ErrorMapper {
     }
   }
 
-  String _mapFirestoreMessage(FirebaseException error) {
+  String _mapRealtimeMessage(FirebaseException error) {
     switch (error.code) {
       case 'permission-denied':
-        return 'Нет прав для выполнения операции';
-      case 'unauthenticated':
+        return 'Нет прав доступа к базе данных';
+      case 'data-exists':
+        return 'Данные уже существуют';
+      case 'invalid-token':
+        return 'Неверный токен авторизации';
+      case 'max-retries-exceeded':
+        return 'Превышено максимальное количество попыток';
+      case 'network-error':
+        return 'Ошибка сети';
+      case 'offline':
+        return 'Нет соединения с интернетом';
+      case 'requires-authentication':
         return 'Требуется авторизация';
-      case 'not-found':
-        return 'Документ не найден';
-      case 'already-exists':
-        return 'Документ уже существует';
-      case 'failed-precondition':
-        return 'Операция невозможна в текущем состоянии';
-      case 'invalid-argument':
-        return 'Некорректные данные запроса';
-      case 'resource-exhausted':
-        return 'Превышены лимиты/квоты Firestore';
-      case 'deadline-exceeded':
-        return 'Превышено время ожидания';
+      case 'unauthorized':
+        return 'Не авторизован';
       case 'unavailable':
-        return 'Сервис Firestore временно недоступен';
-      case 'cancelled':
-        return 'Операция отменена';
-      case 'aborted':
-        return 'Операция прервана (повтори попытку)';
-      case 'internal':
-        return 'Внутренняя ошибка Firestore';
-      case 'data-loss':
-        return 'Потеря или повреждение данных';
+        return 'Сервис временно недоступен';
       default:
-        return error.message ?? 'Ошибка Firestore';
+        return error.message ?? 'Ошибка Realtime Database';
     }
   }
 }
