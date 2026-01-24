@@ -3,7 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:quick_doodle/core/config/app_colors.dart';
 import 'package:quick_doodle/core/config/app_text_styles.dart';
+import 'package:quick_doodle/core/config/navigation/app_routes.dart';
 import 'package:quick_doodle/presentation/auth/controller/auth_controller.dart';
+import 'package:quick_doodle/presentation/gallery/components/cached_doodle_image.dart';
 import 'package:quick_doodle/presentation/gallery/provider/doodles_provider.dart';
 import 'package:quick_doodle/shared/components/custom_app_bar.dart';
 import 'package:quick_doodle/shared/components/custom_button.dart';
@@ -22,16 +24,17 @@ class GalleryScreen extends ConsumerWidget {
         leading: IconButton(
           onPressed: () async {
             final isLogout = await _confirmLogout(context);
-            if (!isLogout) return;
-
-            await ref.read(authControllerProvider.notifier).signOut();
+            if (isLogout) {
+              await ref.read(authControllerProvider.notifier).signOut();
+            }
           },
           icon: SvgPicture.asset('assets/icons/logout.svg'),
         ),
         actions: (doodlesAsync.value?.isNotEmpty ?? false)
             ? [
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () =>
+                      Navigator.pushNamed(context, AppRoutes.doodle),
                   icon: SvgPicture.asset('assets/icons/paint_roller.svg'),
                 ),
               ]
@@ -70,41 +73,40 @@ class GalleryScreen extends ConsumerWidget {
                 alignment: Alignment.bottomCenter,
                 child: CustomButton(
                   title: 'Создать',
-                  onPressed: () {
-                    // Navigator.pushNamed(context, AppRoutes.editor);
-                  },
+                  onPressed: () =>
+                      Navigator.pushNamed(context, AppRoutes.doodle),
                 ),
               );
             }
             return Column(
               children: [
+                const SizedBox(height: 35),
                 Expanded(
                   child: GridView.builder(
                     itemCount: items.length,
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
-                          mainAxisSpacing: 12,
-                          crossAxisSpacing: 12,
+                          mainAxisSpacing: 16,
+                          crossAxisSpacing: 16,
                         ),
-                    itemBuilder: (context, i) {
-                      final doodle = items[i];
+                    itemBuilder: (context, index) {
+                      final doodle = items[index];
                       return GestureDetector(
-                        onTap: () {
-                          // Navigator.pushNamed(context, AppRoutes.editor, arguments: doodle.id);
-                        },
-                        child: Container(color: Colors.white10),
+                        onTap: () => Navigator.pushNamed(
+                          context,
+                          AppRoutes.doodle,
+                          arguments: doodle,
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child: SizedBox(
+                            height: 160,
+                            width: double.infinity,
+                            child: CachedDoodleImage(doodle: doodle),
+                          ),
+                        ),
                       );
-                    },
-                  ),
-                ),
-                const SizedBox(height: 16),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: CustomButton(
-                    title: 'Создать',
-                    onPressed: () {
-                      // Navigator.pushNamed(context, AppRoutes.editor);
                     },
                   ),
                 ),
@@ -123,7 +125,7 @@ class GalleryScreen extends ConsumerWidget {
     final result = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Color.fromRGBO(16, 18, 24, 1),
         shape: RoundedRectangleBorder(
           side: BorderSide(color: AppColors.grey),
           borderRadius: BorderRadius.circular(8),

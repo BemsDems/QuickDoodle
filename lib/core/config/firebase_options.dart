@@ -46,6 +46,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '754431644910',
     projectId: 'quickdoodle-e386e',
     authDomain: 'quickdoodle-e386e.firebaseapp.com',
+    databaseURL: 'https://quickdoodle-e386e-default-rtdb.firebaseio.com',
     storageBucket: 'quickdoodle-e386e.firebasestorage.app',
     measurementId: 'G-JHT7SSN9D7',
   );
@@ -55,16 +56,18 @@ class DefaultFirebaseOptions {
     appId: '1:754431644910:android:7eff4f8b10c1a43b168fff',
     messagingSenderId: '754431644910',
     projectId: 'quickdoodle-e386e',
+    databaseURL: 'https://quickdoodle-e386e-default-rtdb.firebaseio.com',
     storageBucket: 'quickdoodle-e386e.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyCxGmzOsV8xJHupNYfnvtbCGC-rH9k1GvY',
-    appId: '1:754431644910:ios:c470ff4a0a8afbf3168fff',
+    appId: '1:754431644910:ios:e47ff2b5c28d6f0e168fff',
     messagingSenderId: '754431644910',
     projectId: 'quickdoodle-e386e',
+    databaseURL: 'https://quickdoodle-e386e-default-rtdb.firebaseio.com',
     storageBucket: 'quickdoodle-e386e.firebasestorage.app',
-    iosBundleId: 'com.example.quickDoodle',
+    iosBundleId: 'com.name.quickDoodle',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
@@ -72,6 +75,7 @@ class DefaultFirebaseOptions {
     appId: '1:754431644910:ios:c470ff4a0a8afbf3168fff',
     messagingSenderId: '754431644910',
     projectId: 'quickdoodle-e386e',
+    databaseURL: 'https://quickdoodle-e386e-default-rtdb.firebaseio.com',
     storageBucket: 'quickdoodle-e386e.firebasestorage.app',
     iosBundleId: 'com.example.quickDoodle',
   );
@@ -82,7 +86,9 @@ class DefaultFirebaseOptions {
     messagingSenderId: '754431644910',
     projectId: 'quickdoodle-e386e',
     authDomain: 'quickdoodle-e386e.firebaseapp.com',
+    databaseURL: 'https://quickdoodle-e386e-default-rtdb.firebaseio.com',
     storageBucket: 'quickdoodle-e386e.firebasestorage.app',
     measurementId: 'G-PYVSHEVRTL',
   );
+
 }

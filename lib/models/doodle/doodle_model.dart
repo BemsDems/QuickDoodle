@@ -3,7 +3,7 @@ class DoodleModel {
   final String title;
   final String authorId;
   final String authorName;
-  final String? previewBase64;
+  final DateTime? createdAt;
   final String? fullImageBase64;
 
   const DoodleModel({
@@ -11,7 +11,7 @@ class DoodleModel {
     required this.title,
     required this.authorId,
     required this.authorName,
-    this.previewBase64,
+    required this.createdAt,
     this.fullImageBase64,
   });
 
@@ -21,7 +21,9 @@ class DoodleModel {
       title: (json['title'] ?? '') as String,
       authorId: (json['authorId'] ?? '') as String,
       authorName: (json['authorName'] ?? '') as String,
-      previewBase64: json['previewBase64'] as String?,
+      createdAt: json['createdAt'] != null
+          ? DateTime.fromMillisecondsSinceEpoch(json['createdAt'] as int)
+          : null,
       fullImageBase64: json['fullImageBase64'] as String?,
     );
   }
@@ -31,7 +33,25 @@ class DoodleModel {
     'title': title,
     'authorId': authorId,
     'authorName': authorName,
-    'previewBase64': previewBase64,
     'fullImageBase64': fullImageBase64,
   };
+
+  DoodleModel copyWith({
+    String? id,
+    String? title,
+    String? authorId,
+    String? authorName,
+    String? previewBase64,
+    String? fullImageBase64,
+    DateTime? createdAt,
+  }) {
+    return DoodleModel(
+      id: id ?? this.id,
+      title: title ?? this.title,
+      authorId: authorId ?? this.authorId,
+      authorName: authorName ?? this.authorName,
+      fullImageBase64: fullImageBase64 ?? this.fullImageBase64,
+      createdAt: createdAt ?? this.createdAt,
+    );
+  }
 }

@@ -21,4 +21,15 @@ class SafeCaller {
       return left(failure);
     }
   }
+
+  Stream<Either<AppFailure, T>> stream<T>(
+    Stream<Either<AppFailure, T>> Function() action,
+  ) async* {
+    try {
+      yield* action();
+    } catch (e, st) {
+      final failure = e is AppFailure ? e : _errorMapper.map(e, st);
+      yield left(failure);
+    }
+  }
 }

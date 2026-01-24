@@ -1,5 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:quick_doodle/core/error/error_mapper.dart';
@@ -12,9 +12,10 @@ final firebaseAuthProvider = Provider<FirebaseAuth>(
   (ref) => FirebaseAuth.instance,
 );
 
-final firestoreProvider = Provider<FirebaseFirestore>(
-  (ref) => FirebaseFirestore.instance,
-);
+final realtimeDatabaseProvider = Provider<DatabaseReference>((ref) {
+  final database = FirebaseDatabase.instance.ref();
+  return database;
+});
 
 final internetConnectionProvider = Provider<InternetConnection>(
   (ref) => InternetConnection(),
@@ -43,7 +44,7 @@ final authRepositoryProvider = Provider<AuthRepository>((ref) {
 
 final doodleRepositoryProvider = Provider<DoodleRepository>((ref) {
   return DoodleRepository(
-    firestore: ref.watch(firestoreProvider),
+    database: ref.watch(realtimeDatabaseProvider),
     safeCaller: ref.watch(safeCallerProvider),
   );
 });
