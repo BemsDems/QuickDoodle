@@ -97,6 +97,7 @@ dev_dependencies:
   auto_route_generator: ^10.2.6
 
   flutter_launcher_icons: ^0.14.4
+  flutter_native_splash: ^2.4.7
 
 flutter_launcher_icons:
   android: "launcher_icon"
@@ -104,11 +105,10 @@ flutter_launcher_icons:
   image_path: "assets/icons/iconApp.png"
   min_sdk_android: 21
 
-splash_master:
-  image: "assets/images/splash.png"
-  android_12_and_above:
-    color: "#1a1b24"
-    image: "assets/images/splash.png"
+flutter_native_splash:
+  background_image: "assets/images/splash.png"
+  android_12:
+    background_image: "assets/images/splash.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
