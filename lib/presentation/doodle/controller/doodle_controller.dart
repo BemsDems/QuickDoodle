@@ -94,7 +94,7 @@ class DoodleController extends StateNotifier<AsyncValue<void>> {
         (_) {
           NotificationService.show(
             id: 0,
-            title: '✅ Сохранено!',
+            title: 'Изображение сохранено!',
             body:
                 'Размер: ${(base64Decode(compressedImage).length / 1024).toStringAsFixed(1)} KB',
           );
@@ -144,7 +144,7 @@ class DoodleController extends StateNotifier<AsyncValue<void>> {
         (_) {
           NotificationService.show(
             id: 1,
-            title: '✅ Обновлено!',
+            title: 'Изображение обновлено!',
             body:
                 'Размер: ${(base64Decode(compressedImage).length / 1024).toStringAsFixed(1)} KB',
           );

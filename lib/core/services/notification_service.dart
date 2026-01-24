@@ -13,6 +13,9 @@ class NotificationService {
           requestAlertPermission: true,
           requestBadgePermission: true,
           requestSoundPermission: true,
+          defaultPresentAlert: true,
+          defaultPresentBadge: true,
+          defaultPresentSound: true,
         );
 
     const InitializationSettings settings = InitializationSettings(
@@ -35,12 +38,6 @@ class NotificationService {
         critical: false,
       );
     }
-
-    await _notifications
-        .resolvePlatformSpecificImplementation<
-          IOSFlutterLocalNotificationsPlugin
-        >()
-        ?.requestPermissions(alert: true, badge: true, sound: true);
   }
 
   static Future<void> show({
@@ -58,7 +55,13 @@ class NotificationService {
           icon: '@mipmap/ic_launcher',
         );
 
-    const DarwinNotificationDetails iosDetails = DarwinNotificationDetails();
+    const DarwinNotificationDetails iosDetails = DarwinNotificationDetails(
+      presentAlert: true,
+      presentBadge: true,
+      presentSound: true,
+      presentBanner: true,
+      presentList: true,
+    );
 
     const NotificationDetails details = NotificationDetails(
       android: androidDetails,
