@@ -2,19 +2,23 @@
 
 ## Архитектура
 
+**Слоистая**
+
+```text
 lib/
-├── core/ # Базовая инфраструктура
-│ ├── di/ # Dependency Injection (Riverpod)
-│ ├── error/ # Обработка ошибок (AppFailure)
-│ └── config/ # Цвета, стили, роутинг
-├── data/ # Репозитории + Data Sources
-│ └── repositories/
-├── models/ # Модели (DoodleModel, UserModel)
-├── presentation/ # UI + контроллеры (MVVM-подобная)
-│ ├── auth/ # Экраны авторизации
-│ ├── gallery/ # Галерея рисунков
-│ └── doodle/ # Редактор рисунков
-└── shared/ # Переиспользуемые компоненты
+├── core/           # Базовая инфраструктура
+│   ├── di/         # Dependency Injection (Riverpod)
+│   ├── error/      # Обработка ошибок (AppFailure)
+│   └── config/     # Цвета, стили, роутинг
+├── data/           # Репозитории + Data Sources
+│   └── repositories/
+├── models/         # Модели (DoodleModel, UserModel)
+├── presentation/   # UI + контроллеры (MVVM-подобная)
+│   ├── auth/       # Экраны авторизации
+│   ├── gallery/    # Галерея рисунков
+│   └── doodle/     # Редактор рисунков
+└── shared/         # Переиспользуемые компоненты
+
 
 ## Стек технологий
 
