@@ -28,7 +28,9 @@ class GalleryScreen extends ConsumerWidget {
               ref.exists(doodlesProvider);
               ref.invalidate(doodleCacheProvider);
               await ref.read(authControllerProvider.notifier).signOut();
-              Navigator.pushReplacementNamed(context, AppRoutes.signIn);
+              if (context.mounted) {
+                Navigator.pushReplacementNamed(context, AppRoutes.signIn);
+              }
             }
           },
           icon: SvgPicture.asset('assets/icons/logout.svg'),

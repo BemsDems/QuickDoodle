@@ -26,7 +26,7 @@ class NotificationService {
 
   static Future<void> initialize() async {
     const AndroidInitializationSettings androidSettings =
-        AndroidInitializationSettings('@mipmap/ic_launcher');
+        AndroidInitializationSettings('ic_launcher_foreground');
     const DarwinInitializationSettings iosSettings =
         DarwinInitializationSettings(
           requestAlertPermission: true,
@@ -58,7 +58,6 @@ class NotificationService {
           channelDescription: 'Уведомления о сохранении рисунков',
           importance: Importance.max,
           priority: Priority.high,
-          largeIcon: DrawableResourceAndroidBitmap('ic_launcher_foreground'),
         );
 
     const DarwinNotificationDetails iosDetails = DarwinNotificationDetails(
@@ -74,7 +73,6 @@ class NotificationService {
       iOS: iosDetails,
     );
 
-    
     await _notifications.show(id, title, body, details);
   }
 }
