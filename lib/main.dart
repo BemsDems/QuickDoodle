@@ -1,3 +1,5 @@
+import 'dart:nativewrappers/_internal/vm/lib/developer.dart';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -14,10 +16,15 @@ import 'package:quick_doodle/shared/observer/auth_navigator_observer.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  ).then((_) => FirebaseDatabase.instance.setPersistenceEnabled(true));
-  NotificationService.initialize();
+  try {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+    FirebaseDatabase.instance.setPersistenceEnabled(true);
+    NotificationService.initialize();
+  } catch (e) {
+    log('Ошибка при запуске ${e.toString()}');
+  }
 
   runApp(ProviderScope(child: const MyApp()));
 }
