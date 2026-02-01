@@ -195,30 +195,32 @@ class _DoodleScreenState extends ConsumerState<DoodleScreen> {
               ],
             ),
             const SizedBox(height: 25),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(18),
-              child: AspectRatio(
-                aspectRatio: 3 / 5,
-                child: LayoutBuilder(
-                  builder: (context, constraints) {
-                    return DrawingBoard(
-                      controller: controller,
-                      background: _backgroundFile != null
-                          ? SizedBox(
-                              width: constraints.maxWidth,
-                              height: constraints.maxHeight,
-                              child: Image.memory(
-                                _backgroundFile!,
-                                fit: BoxFit.cover,
+            Expanded(
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(18),
+                child: AspectRatio(
+                  aspectRatio: 3 / 4,
+                  child: LayoutBuilder(
+                    builder: (context, constraints) {
+                      return DrawingBoard(
+                        controller: controller,
+                        background: _backgroundFile != null
+                            ? SizedBox(
+                                width: constraints.maxWidth,
+                                height: constraints.maxHeight,
+                                child: Image.memory(
+                                  _backgroundFile!,
+                                  fit: BoxFit.cover,
+                                ),
+                              )
+                            : Container(
+                                width: constraints.maxWidth,
+                                height: constraints.maxHeight,
+                                color: Colors.white,
                               ),
-                            )
-                          : Container(
-                              width: constraints.maxWidth,
-                              height: constraints.maxHeight,
-                              color: Colors.white,
-                            ),
-                    );
-                  },
+                      );
+                    },
+                  ),
                 ),
               ),
             ),
