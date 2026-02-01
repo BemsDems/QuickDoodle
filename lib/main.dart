@@ -11,6 +11,7 @@ import 'package:quick_doodle/presentation/auth/sign_in_screen.dart';
 import 'package:quick_doodle/presentation/auth/sign_up_screen.dart';
 import 'package:quick_doodle/presentation/doodle/doodle_screen.dart';
 import 'package:quick_doodle/presentation/gallery/gallery_screen.dart';
+import 'package:quick_doodle/presentation/splash/slash_screen.dart';
 import 'package:quick_doodle/shared/observer/auth_navigator_observer.dart';
 
 Future<void> main() async {
@@ -35,9 +36,10 @@ class MyApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
       title: 'Quick Doodle',
-      initialRoute: AppRoutes.signIn,
+      initialRoute: AppRoutes.splash,
       navigatorObservers: [AuthNavigatorObserver(ref)],
       routes: {
+        AppRoutes.splash: (_) => const SplashScreen(),
         AppRoutes.signIn: (_) => const SignInScreen(),
         AppRoutes.signUp: (_) => const SignUpScreen(),
         AppRoutes.gallery: (_) => const GalleryScreen(),
@@ -47,6 +49,7 @@ class MyApp extends ConsumerWidget {
           return DoodleScreen(doodle: doodle);
         },
       },
+      
     );
   }
 }
