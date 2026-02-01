@@ -24,10 +24,6 @@
 		<string>????</string>
 		<key>CFBundleVersion</key>
 		<string>$(FLUTTER_BUILD_NUMBER)</string>
-		<key>LSApplicationQueriesSchemes</key>
-		<array>
-			<string>share</string>
-		</array>
 		<key>LSRequiresIPhoneOS</key>
 		<true/>
 		<key>NSCameraUsageDescription</key>
@@ -38,12 +34,6 @@
 		<string>Мы используем галерею, чтобы выбрать изображение для рисования.</string>
 		<key>UIApplicationSupportsIndirectInputEvents</key>
 		<true/>
-		<key>NSUserNotificationUsageDescription</key>
-		<string>Разрешение на уведомления</string>
-		<key>UIBackgroundModes</key>
-		<array>
-			<string>remote-notification</string>
-		</array>
 		<key>UILaunchStoryboardName</key>
 		<string>LaunchScreen</string>
 		<key>UIMainStoryboardFile</key>
