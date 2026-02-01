@@ -120,9 +120,20 @@ class _DoodleScreenState extends ConsumerState<DoodleScreen> {
               children: [
                 CircleToolButton(
                   asset: 'assets/icons/download.svg',
-                  onTap: () => ref
-                      .read(doodleControllerProvider.notifier)
-                      .shareDoodle(drawingController),
+                  onTap: () {
+                    final box = context.findRenderObject() as RenderBox?;
+
+                    final shareRect = box != null
+                        ? box.localToGlobal(Offset.zero) & box.size
+                        : null;
+
+                    ref
+                        .read(doodleControllerProvider.notifier)
+                        .shareDoodle(
+                          drawingController: drawingController,
+                          sharePositionOrigin: shareRect,
+                        );
+                  },
                 ),
                 const SizedBox(width: 12),
                 CircleToolButton(

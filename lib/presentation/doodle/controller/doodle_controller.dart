@@ -29,7 +29,10 @@ class DoodleController extends StateNotifier<AsyncValue<void>> {
 
   final Ref ref;
 
-  Future<void> shareDoodle(DrawingController drawingController) async {
+  Future<void> shareDoodle({
+    required DrawingController drawingController,
+    Rect? sharePositionOrigin,
+  }) async {
     state = const AsyncLoading();
 
     try {
@@ -52,6 +55,7 @@ class DoodleController extends StateNotifier<AsyncValue<void>> {
         ShareParams(
           text: 'Мой рисунок из QuickDoodle!',
           files: [XFile(filePath)],
+          sharePositionOrigin: sharePositionOrigin,
         ),
       );
 
@@ -76,7 +80,7 @@ class DoodleController extends StateNotifier<AsyncValue<void>> {
         state = AsyncError('Экспорт не удался', StackTrace.empty);
         return false;
       }
-      await _saveToGallery(bytes);
+      await _saveToGallery(imageBytes: bytes);
       final compressedImage = await _compressImage(originalBytes: bytes);
 
       final repository = ref.read(doodleRepositoryProvider);
@@ -123,7 +127,7 @@ class DoodleController extends StateNotifier<AsyncValue<void>> {
         return false;
       }
 
-      await _saveToGallery(bytes);
+      await _saveToGallery(imageBytes: bytes);
 
       final compressedImage = await _compressImage(
         originalBytes: bytes,
@@ -205,7 +209,7 @@ class DoodleController extends StateNotifier<AsyncValue<void>> {
     return fullImageBase64;
   }
 
-  Future<void> _saveToGallery(Uint8List imageBytes) async {
+  Future<void> _saveToGallery({required Uint8List imageBytes}) async {
     try {
       final result = await SaverGallery.saveImage(
         imageBytes,
